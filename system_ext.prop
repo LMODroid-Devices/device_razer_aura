@@ -1,0 +1,5 @@
+# Dex2oat
+dalvik.vm.dex2oat64.enabled=true
+
+# QC framework value-adds
+ro.vendor.qti.va_aosp.support=1
