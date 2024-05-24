@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_aura.mk
+    $(LOCAL_DIR)/lmodroid_aura.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_aura-user \
-    lineage_aura-userdebug \
-    lineage_aura-eng
+    lmodroid_aura-user \
+    lmodroid_aura-userdebug \
+    lmodroid_aura-eng
