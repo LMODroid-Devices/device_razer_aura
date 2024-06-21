@@ -6,8 +6,3 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/lmodroid_aura.mk
-
-COMMON_LUNCH_CHOICES := \
-    lmodroid_aura-user \
-    lmodroid_aura-userdebug \
-    lmodroid_aura-eng
