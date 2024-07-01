@@ -12,6 +12,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o_mr1.mk
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/razer/aura/aura-vendor.mk)
 
+# Add common definitions for Qualcomm
+$(call inherit-product, hardware/qcom-caf/common/common.mk)
+
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
@@ -73,16 +76,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml
 
-# Properties
-PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
-
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-
-# AID/fs configs
-PRODUCT_PACKAGES += \
-    fs_config_files
 
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -168,6 +164,10 @@ PRODUCT_PACKAGES += \
     libgui_shim \
     vendor.qti.hardware.camera.device@1.0.vendor
 
+# Configstore
+PRODUCT_PACKAGES += \
+    disable_configstore
+
 # Control groups and task profiles
 PRODUCT_COPY_FILES += \
     system/core/libprocessgroup/profiles/cgroups_28.json:$(TARGET_COPY_OUT_VENDOR)/etc/cgroups.json \
@@ -231,7 +231,8 @@ PRODUCT_PACKAGES += \
 
 # Gatekeeper
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0.vendor
+    android.hardware.gatekeeper@1.0.vendor \
+    libion.vendor
 
 # GMS
 ifeq ($(WITH_GMS),true)
@@ -259,6 +260,7 @@ PRODUCT_PACKAGES += \
     android.hidl.allocator@1.0.vendor \
     android.hidl.base@1.0 \
     android.hidl.memory@1.0.vendor \
+    libhidlmemory.vendor:64 \
     libhidltransport \
     libhidltransport.vendor \
     libhwbinder \
@@ -363,7 +365,13 @@ PRODUCT_PACKAGES += \
     CarrierConfigOverlay \
     libavservices_minijail.vendor \
     libjson \
-    librmnetctl
+    librmnetctl \
+    libsqlite.vendor
+
+# RFS MSM MPSS symlinks
+PRODUCT_PACKAGES += \
+    rfs_msm_mpss_fih_rfs_data_misc_fih_atl_symlink \
+    rfs_msm_mpss_fih_rfs_data_misc_fih_mcfg_symlink
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
@@ -415,8 +423,10 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.0-impl:64 \
-    android.hardware.vibrator@1.0-service
+    vendor.qti.hardware.vibrator.service
+
+PRODUCT_COPY_FILES += \
+    vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
 # VNDK
 PRODUCT_COPY_FILES += \
@@ -451,7 +461,13 @@ PRODUCT_COPY_FILES += \
 # WiFi Display
 PRODUCT_PACKAGES += \
     libnl \
+    libpng.vendor:32 \
     libwfdaac_vendor
 
 PRODUCT_BOOT_JARS += \
     WfdCommon
+
+# WiFi firmware symlinks
+PRODUCT_PACKAGES += \
+    firmware_wlan_mac.bin_symlink \
+    firmware_WCNSS_qcom_cfg.ini_symlink
