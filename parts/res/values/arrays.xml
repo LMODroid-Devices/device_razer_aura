@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: Alcatraz323 <alcatraz32323@gmail.com>
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="chroma_mode_entries" translatable="false">
+        <item>@string/chroma_mode_entry_color</item>
+        <item>@string/chroma_mode_entry_spectrum</item>
+        <item>@string/chroma_mode_entry_wave_ltr</item>
+        <item>@string/chroma_mode_entry_wave_rtl</item>
+    </string-array>
+    <string-array name="chroma_mode_values" translatable="false">
+        <item>color</item>
+        <item>spectrum</item>
+        <item>wave_ltr</item>
+        <item>wave_rtl</item>
+    </string-array>
+</resources>
